@@ -6,6 +6,5 @@ public class Driver {
 	System.out.print("The space is in the ");
 	System.out.print(s.indexOf( ' ' )+1);
 	System.out.println(" place.");
-        // you'll add code here
     }
 }
