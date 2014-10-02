@@ -1,3 +1,4 @@
+
 public class Shapes {
     public String tri1(int h) {
 	String s = "";
@@ -55,11 +56,11 @@ public class Shapes {
 
     public String tri3reverse(int h){
      	String s = "";
-	int rowcounter = 1;
-	while (rowcounter<=h) {
+	int rowcounter = h;
+	while (rowcounter>0) {
 	    int spacecounter = rowcounter;
 	    int columncounter = 1;
-	    while (spacecounter+1 <= h){
+	    while (spacecounter<=h){
 		s += " ";
 		spacecounter += 1;
 	    }
@@ -68,9 +69,15 @@ public class Shapes {
 		columncounter += 1;
 	    }
 	    s=s+"\n";
-	    rowcounter += 1;
+	    rowcounter--;
 	}
         return s;
+    }
+
+    public String diamond(int h){
+	String s= "";
+	return tri3((h/2)+1)+tri3reverse((h/2));
+	
     }
 
     public String tri4(int h) {
