@@ -43,8 +43,14 @@ public class Arraystuff {
 	return maxer;
     }
 
-    public int length() {
-	return a.length;
+    public int freq(int n){
+	int out = 0;
+        for (int i = 0; i<a.length; i++){
+	    if a[n]==a[i]{
+		    out++;
+		}
+	}
+
     }
 
 }
