@@ -52,5 +52,21 @@ public class Arraystuff {
 	}
 
     }
+    
+    public int sum67(int[] nums) {
+	int mode = True;
+	int total = 0;
+	for (int i = 0; i<a.length; i++) {
+	    if nums[1]==6{
+		    mode == False;
+		}
+	    if mode == True{
+		total += nums[i]
+		}
+	    if nums[i]==7{
+		    mode == True;
+		}
+
+	}
 
 }
