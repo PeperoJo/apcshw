@@ -50,7 +50,7 @@ public class Arraystuff {
 		    out++;
 		}
 	}
-
     }
+    p
 
 }
