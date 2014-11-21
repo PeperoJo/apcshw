@@ -33,8 +33,15 @@ public class WordSearch {
 	    }
 	}
     }
-
-    
+    public void addWordV(String w, int row, int col, boolean down){
+	int r = row;
+	if (r+w[0].get.length()<board.length){
+	    for (int i=0; i < w[0].get.length();i++){
+		board[r][col] = w.charAt(i);
+		if (down == true){c--;}else c--;
+	    }
+	}
+    }
 		
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
