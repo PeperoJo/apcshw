@@ -1,10 +1,15 @@
-import java.io.*;
-import java.util.*;
 
+import java.util.Random;
+
+/**
+ * Creates a word search puzzle
+ *
+ */
 public class WordSearch{
-    
+
+    private Random r = new Random();
     private char[][] board;
-    
+
     public WordSearch(int r, int c){
 	board = new char[r][c];
 	for (int i = 0; i < board.length; i++) {
@@ -12,264 +17,90 @@ public class WordSearch{
 		board[i][j]='.';
 	    }
 	}
-	
+				
     }
     public WordSearch(){
-	this(20,40);
+	this(20,30);
     }
-    
+
     public String toString(){
 	String s = "";
+
 	for (int i = 0; i < board.length; i++) {
 	    for (int j = 0; j < board[i].length; j++) {
-		s = s + board[i][j] + " ";
+		s = s + board[i][j];
 	    }
 	    s = s + "\n";
 	}
 	return s;
     }
+
+		
+    public boolean addWordHelper(String w,int row, int col,int deltaRow, int deltaCol){
+	int r = row, c = col;
+				
+	for (int i=0;i<w.length();i++){
+	    try {
+		if (board[r][c]!='.' && board[r][c]!=w.charAt(i)){
+		    return false;
+		}
+	    } catch ( Exception e){
+		return false;
+	    }
+	    r = r + deltaRow;
+	    c = c + deltaCol;
+	}
+	r = row;
+	c = col;
+
+	for (int i=0;i<w.length();i++){
+	    board[r][c] = w.charAt(i);
+	    r = r + deltaRow;
+	    c = c + deltaCol;
+	}
+	return true;
+    }
+
+    public boolean addWord(String w) {
+	int row = r.nextInt(board.length);
+	int col = r.nextInt(board[0].length);
+	int deltaRow = -1 + r.nextInt(3);
+	int deltaCol = -1 + r.nextInt(3);
+
+	if (deltaRow == 0 && deltaCol == 0)
+	    return false;
+	
+	return addWordHelper(w,row,col,deltaRow,deltaCol);
+	
+	
+
+    }
+
     
-    public boolean addWordHTest(String word, int row, int col, char direction) {
-	int r = row, c = col;
-	String w = word;
-	int lastIndex = w.length() - 1;
-	boolean shouldAdd = true;
-	try {
-	    for (int i = 0; i < w.length(); i++) {
-		if (board[r][c] != '.' && board[r][c] != w.charAt(i)) {
-		    shouldAdd = false;
-		    break;
-		}
-		if (direction == 'l') {
-		    c--;
-		}
-		if (direction == 'r') {
-		    c++;
-		}
-	    }
-	}
-	catch (Exception e) {
-	    shouldAdd = false;
-	}
-	return shouldAdd;
-    }
-	    
-    
-    public void addWordH(String word,int row, int col, char direction){
-	int r = row, c = col;
-	String w = word;
-	boolean add = true;
-	int lastIndex = w.length() - 1;
-	if (addWordHTest(w, r, c, direction) == true) {
-	    for (int i = 0; i < w.length(); i++) {
-		board[r][c] = w.charAt(i);
-		if (direction == 'l') {
-		    c--;
-		}
-		if (direction == 'r') {
-		    c++;
-		}
-	    }
-	} 
-    }
-    
-    public boolean addWordVTest(String word, int row, int col, char direction) {
-	int r = row, c = col;
-	String w = word;
-	int lastIndex = w.length() - 1;
-	boolean shouldAdd = true;
-	try {
-	    for (int i = 0; i < w.length(); i++) {
-		if (board[r][c] != '.' && board[r][c] != w.charAt(i)) {
-		    shouldAdd = false;
-		    break;
-		}
-		if (direction == 'u') {
-		    r--;
-		}
-		if (direction == 'd') {
-		    r++;
-		}    
-	    }
-	}
-	catch (Exception e) {
-	    shouldAdd = false;
-	}
-	return shouldAdd;
-    }
-
-    public void addWordV(String word,int row, int col, char direction){
-	int r = row, c = col;
-	String w = word;
-	boolean add = true;
-	int lastIndex = w.length() - 1;
-	if (addWordVTest(w, r, c, direction) == true) {
-	    for (int i = 0; i < w.length(); i++) {
-		board[r][c] = w.charAt(i);
-		if (direction == 'u') {
-		    r--;
-		}
-		if (direction == 'd') {
-		    r++;
-		}
-	    }
-	} 
-    }
-
-    public boolean addWordDTest(String word, int row, int col, char direction) {
-	int r = row, c = col;
-	String w = word;
-	int lastIndex = w.length() - 1;
-	boolean shouldAdd = true;
-	try {
-	    for (int i = 0; i < w.length(); i++) {
-		if (board[r][c] != '.' && board[r][c] != w.charAt(i)) {
-		    shouldAdd = false;
-		    break;
-		}
-		if (direction == 'c') {
-		    c++;
-		    r++;
-		}
-		if (direction == 'b') {
-		    c++;
-		    r--;
-		}
-		if (direction == 'd') {
-		    c--;
-		    r++;
-		}
-		if (direction == 'a') {
-		    c--;
-		    r--;
-		}
-	    }
-	} catch (Exception e) {
-	    shouldAdd = false;
-	}
-	return shouldAdd;
-    }		
-
-    public void addWordD(String word,int row, int col, char direction){
-	int r = row, c = col;
-	String w = word;
-	boolean add = true;
-	int lastIndex = w.length() - 1;
-	if (addWordDTest(w, r, c, direction) == true) {
-	    for (int i = 0; i < w.length(); i++) {
-		board[r][c] = w.charAt(i);
-		if (direction == 'c') {
-		    c++;
-		    r++;
-		}
-		if (direction == 'b') {
-		    c++;
-		    r--;
-		}
-		if (direction == 'd') {
-		    c--;
-		    r++;
-		}
-		if (direction == 'a') {
-		    c--;
-		    r--;
-		}
-	    }
-	}  
-    }
-
-    public boolean addWordRand(String word) {
-	Random rnd = new Random();
-	int r, c, type, randDir;
-	char d = '.';
-	boolean canAdd = false;
-	for (int i = 0; i < 100; i++) {
-	    r = rnd.nextInt(board.length);
-	    c = rnd.nextInt(board[1].length);
-	    type = rnd.nextInt(3);
-	    if (type == 0) {
-		randDir = rnd.nextInt(2);
-		if (randDir == 0) {
-		    d = 'l';
-		} else {
-		    d = 'r';
-		}
-		if (addWordHTest(word, r, c, d)) {
-		    addWordH(word, r, c, d);
-		    canAdd = true;
-		    break;
-		}	
-	    } else if (type == 1) {
-		randDir = rnd.nextInt(2);
-		if (randDir == 0) {
-		    d = 'u';
-		} else {
-		    d = 'd';
-		}
-		if (addWordVTest(word, r, c, d)) {
-		    addWordV(word, r, c, d);
-		    canAdd = true;
-		    break;
-		}
-	    } else if (type == 2) {
-		randDir = rnd.nextInt(4);
-		if (randDir == 0) {
-		    d = 'a';
-		} else if (randDir == 1) {
-		    d = 'b';
-		} else if (randDir == 2) {
-		    d = 'c';
-		} else {
-		    d = 'd';
-		}
-		if (addWordDTest(word, r, c, d)) {
-		    addWordD(word, r, c, d);
-		    canAdd = true;
-		    break;
-		}
-	    }
-	}
-	return canAdd;
-    }
-
-    public void fill() {
-	Random rnd = new Random();
-	char[] letters = new char[]{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-	for (int r = 0; r < board.length; r++) {
-	    for (int c = 0; c < board[1].length; c++) {
-		int rInd = rnd.nextInt(26); 
-		if (board[r][c] == '.') {
-		    board[r][c] = letters[rInd];
-		}
-	    }
-	}
-    }
-
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
-
-	Scanner sc=null;
-	ArrayList<String> wordList = new ArrayList<String>();
-	try {
-	    sc = new Scanner(new File("words.txt"));
-	} catch (Exception e) {
-	    System.out.println("Can't open file");
-	    System.exit(0);
-	}
-	while (sc.hasNext()) {
-	    String s = sc.next();
-	    wordList.add(s);
-	    w.addWordRand(s);
-	}
-
-	System.out.println("Words from file text file: ");
-	System.out.println(wordList + "\n");
-
-	System.out.println("After Adding: ");
 	System.out.println(w);
-
-	w.fill();
-	System.out.println("Filling out rest of letters: ");
+	// w.addWord("hello",3,5,0,1);
+	//w.addWord("hello",4,5,0,-1);
+	//w.addWord("hello",11,10,-1,0);
+	//w.addWord("hello",11,11,1,0);
+	
+	//w.addWord("hello",15,15,1,1);
+	//w.addWord("hello",15,15,-1,-1);
+	//w.addWord("hello",15,15,1,-1);
+	//w.addWord("hello",15,15,-1,1);
+	
+	w.addWord("hello0");
+	w.addWord("hello1");
+	w.addWord("hello2");
+	w.addWord("hello3");
+	w.addWord("hello4");
+	w.addWord("hello5");
+	w.addWord("hello6");
+	w.addWord("hello7");
+	w.addWord("hello8");
+	w.addWord("hello9");
+	
 	System.out.println(w);
     }
 }
