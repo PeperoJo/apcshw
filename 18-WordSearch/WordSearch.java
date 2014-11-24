@@ -26,19 +26,19 @@ public class WordSearch {
 
     public void addWordH(String w, int row, int col, boolean right){
 	int c = col;
-	if (c+w.length()<board.length){
+	if (c+w.length()<board.size){
 	    for (int i=0; i < w.length();i++){
 		board[row][c] = w.charAt(i);
 		if (right == true){c++;}else c--;
 	    }
 	}
     }
-    public void addWordV(String w, int row, int col, boolean down){
+    public void addWordV(String w, int row, int col, boolean up){
 	int r = row;
-	if (r+w[0].get.length()<board.length){
-	    for (int i=0; i < w[0].get.length();i++){
+	if (r+w.length()<board.get(0).size){
+	    for (int i=0; i < w.length();i++){
 		board[r][col] = w.charAt(i);
-		if (down == true){c--;}else c--;
+		if (up == true){r++;}else r--;
 	    }
 	}
     }
@@ -50,7 +50,7 @@ public class WordSearch {
 	w.addWordH("hello",2,34, true);
 	w.addWordH("hello",3,38, true);
 	w.addWordH("look",2,14, false); // test illegal overlap
-	System.out.println(board.length);
+	System.out.println(board.size);
 	//w.addWordH("look",3,18); // test legal overlap
 	//w.addWordH("look",-3,20); // test illegal row
 	//w.addWordH("look",3,55); // test illegal col
