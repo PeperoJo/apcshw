@@ -1,4 +1,12 @@
-public class WordSearch {
+import java.util.Random;
+
+/**
+ * Creates a word search puzzle
+ *
+ */
+public class WordSearch{
+
+    private Random r = new Random();
     private char[][] board;
 
     public WordSearch(int r, int c){
@@ -8,13 +16,15 @@ public class WordSearch {
 		board[i][j]='.';
 	    }
 	}
+				
     }
-    public WordSearch() {
-	this(20,40);
+    public WordSearch(){
+	this(20,30);
     }
- 
+
     public String toString(){
 	String s = "";
+
 	for (int i = 0; i < board.length; i++) {
 	    for (int j = 0; j < board[i].length; j++) {
 		s = s + board[i][j];
@@ -24,37 +34,72 @@ public class WordSearch {
 	return s;
     }
 
-    public void addWordH(String w, int row, int col, boolean right){
-	int c = col;
-	if (c+w.length()<board.size){
-	    for (int i=0; i < w.length();i++){
-		board[row][c] = w.charAt(i);
-		if (right == true){c++;}else c--;
-	    }
-	}
-    }
-    public void addWordV(String w, int row, int col, boolean up){
-	int r = row;
-	if (r+w.length()<board.get(0).size){
-	    for (int i=0; i < w.length();i++){
-		board[r][col] = w.charAt(i);
-		if (up == true){r++;}else r--;
-	    }
-	}
-    }
 		
+    public boolean addWordHelper(String w,int row, int col,int deltaRow, int deltaCol){
+	int r = row, c = col;
+				
+	for (int i=0;i<w.length();i++){
+	    try {
+		if (board[r][c]!='.' && board[r][c]!=w.charAt(i)){
+		    return false;
+		}
+	    } catch ( Exception e){
+		return false;
+	    }
+	    r = r + deltaRow;
+	    c = c + deltaCol;
+	}
+	r = row;
+	c = col;
+
+	for (int i=0;i<w.length();i++){
+	    board[r][c] = w.charAt(i);
+	    r = r + deltaRow;
+	    c = c + deltaCol;
+	}
+	return true;
+    }
+
+    public boolean addWord(String w) {
+	int row = r.nextInt(board.length);
+	int col = r.nextInt(board[0].length);
+	int deltaRow = -1 + r.nextInt(3);
+	int deltaCol = -1 + r.nextInt(3);
+
+	if (deltaRow == 0 && deltaCol == 0)
+	    return false;
+	
+	return addWordHelper(w,row,col,deltaRow,deltaCol);
+	
+	
+
+    }
+
+    
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
 	System.out.println(w);
-	w.addWordH("hello",3,15, true); // should work
-	w.addWordH("hello",2,34, true);
-	w.addWordH("hello",3,38, true);
-	w.addWordH("look",2,14, false); // test illegal overlap
-	System.out.println(board.size);
-	//w.addWordH("look",3,18); // test legal overlap
-	//w.addWordH("look",-3,20); // test illegal row
-	//w.addWordH("look",3,55); // test illegal col
-	// etc
+	// w.addWord("hello",3,5,0,1);
+	//w.addWord("hello",4,5,0,-1);
+	//w.addWord("hello",11,10,-1,0);
+	//w.addWord("hello",11,11,1,0);
+	
+	//w.addWord("hello",15,15,1,1);
+	//w.addWord("hello",15,15,-1,-1);
+	//w.addWord("hello",15,15,1,-1);
+	//w.addWord("hello",15,15,-1,1);
+	
+	w.addWord("hello0");
+	w.addWord("hello1");
+	w.addWord("hello2");
+	w.addWord("hello3");
+	w.addWord("hello4");
+	w.addWord("hello5");
+	w.addWord("hello6");
+	w.addWord("hello7");
+	w.addWord("hello8");
+	w.addWord("hello9");
+	
 	System.out.println(w);
     }
 }
