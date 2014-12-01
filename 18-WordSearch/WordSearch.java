@@ -75,19 +75,23 @@ public class WordSearch{
 
     }
 
-    
+    public String fillIn(){
+	String f  = "";
+
+	for (int i = 0; i < board.length; i++) {
+	    String alpha = "abcdefghijklmnopqrstuvwxyz";
+	    for (int j = 0; j < board[i].length; j++) {
+		if (!(board[i][j]=='.')){
+		    f = f + board[i][j];
+		}
+		else f = f + alpha(r.nextInt(alpha.length));
+	    }
+	    f = f + "\n";
+	}
+	return f;
+    }
     public static void main(String[] args) {
 	WordSearch w = new WordSearch();
-	System.out.println(w);
-	// w.addWord("hello",3,5,0,1);
-	//w.addWord("hello",4,5,0,-1);
-	//w.addWord("hello",11,10,-1,0);
-	//w.addWord("hello",11,11,1,0);
-	
-	//w.addWord("hello",15,15,1,1);
-	//w.addWord("hello",15,15,-1,-1);
-	//w.addWord("hello",15,15,1,-1);
-	//w.addWord("hello",15,15,-1,1);
 	
 	w.addWord("hello0");
 	w.addWord("hello1");
@@ -99,7 +103,12 @@ public class WordSearch{
 	w.addWord("hello7");
 	w.addWord("hello8");
 	w.addWord("hello9");
-	
-	System.out.println(w);
+	System.out.println("[Answer key]\n"+w);
+	System.out.println();
     }
 }
+
+//user decides how many inputs
+//size of the board
+//answer key
+//reads txt file
