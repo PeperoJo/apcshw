@@ -54,7 +54,16 @@ public class OrderedSarray {
 	data[index] = s;
 	return oldVal;
     }
-    
+        public void isort() {
+	for (int n = 1; n < data.length; n++) {
+	    int i;
+	    String s = data[n];
+	    for (i = n; i > 0 && s.compareTo(data[i-1]) < 0; i--) {
+		data[i] = data[i-1];
+	    }
+	    data[i] = s;
+	}
+    }
     public int size() {
         return data.length;
     }
