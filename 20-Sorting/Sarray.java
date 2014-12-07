@@ -51,4 +51,30 @@ public class Sarray {
         }
         int[] data = new int[] data2;
     }
+     public void isort() {
+	for (int n = 1; n < data.length; n++) {
+	    int i;
+	    String s = data[n];
+	    for (i = n; i > 0 && s.compareTo(data[i-1]) < 0; i--) {
+		data[i] = data[i-1];
+	    }
+	    data[i] = s;
+	}
+    }
+    public void selectionSort(int[] arr) {
+      int i, j, minIndex, tmp;
+      int n = arr.length;
+      for (i = 0; i < n - 1; i++) {
+            minIndex = i;
+            for (j = i + 1; j < n; j++)
+                  if (arr[j] < arr[minIndex])
+                        minIndex = j;
+            if (minIndex != i) {
+                  tmp = arr[i];
+                  arr[i] = arr[minIndex];
+                  arr[minIndex] = tmp;
+            }
+      }
+}
+
 }
