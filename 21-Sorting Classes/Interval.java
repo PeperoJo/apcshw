@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class Interval {
+class Interval implements Comparable{
 
     private int low,high;
     private Random r = new Random();				
