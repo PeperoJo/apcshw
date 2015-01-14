@@ -1,0 +1,12 @@
+Repo: https://github.com/alex-wyc/APCSFinalProject/blob/master/src/Driver.java
+
+- Driver.java is understandable and leads to URLtoSource.java
+
+- URLtoSource.java gathers info from the URL link
+
+	- the Pattern heatPatS sounds a bit confusing for a third party reader
+	- converts data into understandable info
+
+- TestSplit.java isn't clear as to what its suppose to do
+
+
